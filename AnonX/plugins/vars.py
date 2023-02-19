@@ -18,7 +18,7 @@ async def varsFunc(client, message):
         "Please wait.. Getting your config"
     )
     v_limit = await get_video_limit()
-    bot_name = config.MUSIC_BOT_NAME
+    MUSIC_BOT_NAME = config.MUSIC_BOT_NAME
     up_r = f"[Repo]({config.UPSTREAM_REPO})"
     up_b = config.UPSTREAM_BRANCH
     auto_leave = config.AUTO_LEAVE_ASSISTANT_TIME
@@ -62,7 +62,7 @@ async def varsFunc(client, message):
     if not config.SUPPORT_GROUP:
         s_g = "No"
     else:
-        s_g = f"[Group]({config.SUPPORT_GROUP})"
+        s_g = f"[Support]({config.SUPPORT_GROUP})"
     if not config.GIT_TOKEN:
         token = "No"
     else:
