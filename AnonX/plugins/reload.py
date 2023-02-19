@@ -71,7 +71,7 @@ async def restartbot(client, message: Message, _):
             pass
         try:
             db[chat_id] = []
-            await Yukki.stop_stream(chat_id)
+            await Anon.stop_stream(chat_id)
         except:
             pass
     return await mystic.edit_text(
