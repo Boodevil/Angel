@@ -6,7 +6,7 @@ from pyrogram.types import CallbackQuery, Message
 from config import BANNED_USERS, MUSIC_BOT_NAME, adminlist, lyrical
 from strings import get_command
 from AnonX import app
-from AnonX.core.call import Yukki
+from AnonX.core.call import Anon
 from AnonX.misc import db
 from AnonX.utils.database import get_authuser_names, get_cmode
 from AnonX.utils.decorators import (ActualAdminCB, AdminActual,
@@ -60,7 +60,7 @@ async def restartbot(client, message: Message, _):
     await asyncio.sleep(1)
     try:
         db[message.chat.id] = []
-        await Yukki.stop_stream(message.chat.id)
+        await Anon.stop_stream(message.chat.id)
     except:
         pass
     chat_id = await get_cmode(message.chat.id)
