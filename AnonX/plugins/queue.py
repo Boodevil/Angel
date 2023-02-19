@@ -24,9 +24,9 @@ QUEUE_COMMAND = get_command("QUEUE_COMMAND")
 basic = {}
 
 
-def get_image(videoid, user_id):
-    if os.path.isfile(f"cache/{videoid}_{user_id}.png"):
-        return f"cache/{videoid}_{user_id}.png"
+def get_image(videoid):
+    if os.path.isfile(f"cache/{videoid}.png"):
+        return f"cache/{videoid}.png"
     else:
         return config.YOUTUBE_IMG_URL
 
@@ -67,14 +67,13 @@ async def ping_com(client, message: Message, _):
     file = got[0]["file"]
     videoid = got[0]["vidid"]
     user = got[0]["by"]
-    user_id = got[0]["user_id"]
     title = (got[0]["title"]).title()
     typo = (got[0]["streamtype"]).title()
     DUR = get_duration(got)
     if "live_" in file:
-        IMAGE = get_image(videoid, user_id)
+        IMAGE = get_image(videoid)
     elif "vid_" in file:
-        IMAGE = get_image(videoid, user_id)
+        IMAGE = get_image(videoid)
     elif "index_" in file:
         IMAGE = config.STREAM_IMG_URL
     else:
@@ -87,18 +86,18 @@ async def ping_com(client, message: Message, _):
         elif videoid == "soundcloud":
             IMAGE = config.SOUNCLOUD_IMG_URL
         else:
-            IMAGE = get_image(videoid, user_id)
+            IMAGE = get_image(videoid)
     send = (
-        "**⌛️ᴅᴜʀᴀᴛɪᴏɴ:** ᴜɴᴋɴᴏᴡɴ ᴅᴜʀᴀᴛɪᴏɴ sᴛʀᴇᴀᴍ\n\nᴄʟɪᴄᴋ ᴏɴ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ ᴛᴏ ᴡʜᴏʟᴇ ǫᴜᴇᴜᴇᴅ ʟɪsᴛ."
+        "**Duration:** Unknown Duration Stream\n\nClick on button below to get whole queued list."
         if DUR == "Unknown"
-        else "\nᴄʟɪᴄᴋ ᴏɴ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ ᴛᴏ ɢᴇᴛ ᴡʜᴏʟᴇ ǫᴜᴇᴜᴇᴅ ʟɪsᴛ."
+        else "\nClick on button below to get whole queued list."
     )
-    cap = f"""**{config.MUSIC_BOT_NAME} ᴩʟᴀʏᴇʀ**
+    cap = f"""**{config.MUSIC_BOT_NAME} Player**
 
-📌**ᴛɪᴛʟᴇ:** {title}
+**Playing:** {title}
 
-🍒**ᴛʏᴩᴇ:** {typo}
-💖**ʀᴇǫᴜᴇsᴛᴇᴅ ʙʏ:** {user}
+**Stream Type:** {typo}
+**Played By:** {user}
 {send}"""
     upl = (
         queue_markup(_, DUR, "c" if cplay else "g", videoid)
@@ -195,19 +194,19 @@ async def queued_tracks(client, CallbackQuery: CallbackQuery, _):
     for x in got:
         j += 1
         if j == 1:
-            msg += f'Playing :\n\n📌 Title : {x["title"]}\nDuration : {x["dur"]}\nBy : {x["by"]}\n\n'
+            msg += f'Currently Playing:\n\nTitle: {x["title"]}\nDuration: {x["dur"]}\nBy: {x["by"]}\n\n'
         elif j == 2:
-            msg += f'Queued :\n\n📌 Title : {x["title"]}\nDuration : {x["dur"]}\nBy : {x["by"]}\n\n'
+            msg += f'Queued:\n\nTitle: {x["title"]}\nDuration: {x["dur"]}\nBy: {x["by"]}\n\n'
         else:
-            msg += f'📌 Title : {x["title"]}\nDuration : {x["dur"]}\nBy : {x["by"]}\n\n'
+            msg += f'Title: {x["title"]}\nDuration: {x["dur"]}\nBy: {x["by"]}\n\n'
     if "Queued" in msg:
         if len(msg) < 700:
             await asyncio.sleep(1)
             return await CallbackQuery.edit_message_text(
                 msg, reply_markup=buttons
             )
-        if "📌" in msg:
-            msg = msg.replace("📌", "")
+        if "" in msg:
+            msg = msg.replace("", "")
         link = await Anonbin(msg)
         med = InputMediaPhoto(
             media=link, caption=_["queue_3"].format(link)
@@ -248,14 +247,13 @@ async def queue_back(client, CallbackQuery: CallbackQuery, _):
     file = got[0]["file"]
     videoid = got[0]["vidid"]
     user = got[0]["by"]
-    user_id = got[0]["user_id"]
     title = (got[0]["title"]).title()
     typo = (got[0]["streamtype"]).title()
     DUR = get_duration(got)
     if "live_" in file:
-        IMAGE = get_image(videoid, user_id)
+        IMAGE = get_image(videoid)
     elif "vid_" in file:
-        IMAGE = get_image(videoid, user_id)
+        IMAGE = get_image(videoid)
     elif "index_" in file:
         IMAGE = config.STREAM_IMG_URL
     else:
@@ -268,18 +266,18 @@ async def queue_back(client, CallbackQuery: CallbackQuery, _):
         elif videoid == "soundcloud":
             IMAGE = config.SOUNCLOUD_IMG_URL
         else:
-            IMAGE = get_image(videoid, user_id)
+            IMAGE = get_image(videoid)
     send = (
-        "**⌛️ᴅᴜʀᴀᴛɪᴏɴ:** ᴜɴᴋɴᴏᴡɴ ᴅᴜʀᴀᴛɪᴏɴ sᴛʀᴇᴀᴍ\n\nᴄʟɪᴄᴋ ᴏɴ ʙᴜᴛᴛᴏɴ ʙᴇʟᴏᴡ ᴛᴏ ɢᴇᴛ ᴡʜᴏʟᴇ ǫᴜᴇᴜᴇᴅ ʟɪsᴛ."
+        "**Duration:** Unknown Duration Stream\n\nClick on button below to get whole queued list."
         if DUR == "Unknown"
-        else "\nᴄʟɪᴄᴋ ᴏɴ ʙᴜᴛᴛᴏɴ ʙᴇʟᴏᴡ ᴛᴏ ɢᴇᴛ ᴡʜᴏʟᴇ ǫᴜᴇᴜᴇᴅ ʟɪsᴛ."
+        else "\nClick on button below to get whole queued list."
     )
-    cap = f"""**{config.MUSIC_BOT_NAME} ᴩʟᴀʏᴇʀ**
+    cap = f"""**{config.MUSIC_BOT_NAME} Player**
 
-📌 **ᴛɪᴛʟᴇ:** {title}
+**Playing:** {title}
 
-🍒 **ᴛʏᴩᴇ:** {typo}
-💖 **ʀᴇǫᴜᴇsᴛᴇᴅ ʙʏ:** {user}
+**Stream Type:** {typo}
+**Played By:** {user}
 {send}"""
     upl = (
         queue_markup(_, DUR, cplay, videoid)
