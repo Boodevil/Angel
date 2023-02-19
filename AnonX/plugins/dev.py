@@ -38,7 +38,7 @@ async def edit_or_reply(msg: Message, **kwargs):
 async def executor(client, message):
     if len(message.command) < 2:
         return await edit_or_reply(
-            message, text="**ᴡʜᴀᴛ ʏᴏᴜ ᴡᴀɴɴᴀ ᴇxᴇᴄᴜᴛᴇ ʙᴀʙʏ ?**"
+            message, text="**what you wanna ?**"
         )
     try:
         cmd = message.text.split(" ", maxsplit=1)[1]
@@ -77,7 +77,7 @@ async def executor(client, message):
             [
                 [
                     InlineKeyboardButton(
-                        text="⏳",
+                        text="",
                         callback_data=f"runtime {t2-t1} Seconds",
                     )
                 ]
@@ -97,11 +97,11 @@ async def executor(client, message):
             [
                 [
                     InlineKeyboardButton(
-                        text="⏳",
+                        text="",
                         callback_data=f"runtime {round(t2-t1, 3)} Seconds",
                     ),
                     InlineKeyboardButton(
-                        text="🗑",
+                        text="",
                         callback_data=f"forceclose abc|{message.from_user.id}",
                     ),
                 ]
@@ -126,7 +126,7 @@ async def forceclose_command(_, CallbackQuery):
     if CallbackQuery.from_user.id != int(user_id):
         try:
             return await CallbackQuery.answer(
-                "» ɪᴛ'ʟʟ ʙᴇ ʙᴇᴛᴛᴇʀ ɪғ ʏᴏᴜ sᴛᴀʏ ɪɴ ʏᴏᴜʀ ʟɪᴍɪᴛs ʙᴀʙʏ.", show_alert=True
+                " it will be better if you stay in your limits.", show_alert=True
             )
         except:
             return
@@ -146,7 +146,7 @@ async def forceclose_command(_, CallbackQuery):
 async def shellrunner(client, message):
     if len(message.command) < 2:
         return await edit_or_reply(
-            message, text="**ᴇxᴀᴍᴩʟᴇ :**\n/sh git pull"
+            message, text="**Examble :**\n/sh git pull"
         )
     text = message.text.split(None, 1)[1]
     if "\n" in text:
