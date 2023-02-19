@@ -582,7 +582,7 @@ async def play_music(client, CallbackQuery, _):
 async def anonymous_check(client, CallbackQuery):
     try:
         await CallbackQuery.answer(
-            "Youre an anonymous admin\n\nRevert back to user by using me.",
+            "Youre an anonymous admin\n\nRevert back to useraccount for using me.",
             show_alert=True,
         )
     except:
