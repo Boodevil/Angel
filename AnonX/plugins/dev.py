@@ -146,7 +146,7 @@ async def forceclose_command(_, CallbackQuery):
 async def shellrunner(client, message):
     if len(message.command) < 2:
         return await edit_or_reply(
-            message, text="**Examble :**\n/sh git pull"
+            message, text="**Example :**\n/sh git pull"
         )
     text = message.text.split(None, 1)[1]
     if "\n" in text:
