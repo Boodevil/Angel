@@ -330,7 +330,7 @@ async def play_commnd(
             except NoActiveGroupCall:
                 await mystic.edit_text(
                     "There is an error in this bot..contact support group."
-                
+                                )
                 return await app.send_message(
                     config.LOG_GROUP_ID,
                     "Plz turn on videochat to stream url.",
