@@ -36,21 +36,16 @@ def private_panel(_, BOT_USERNAME, OWNER: Union[bool, int] = None):
         ],
         [
             InlineKeyboardButton(
-                text="Help", callback_data="settings_back_helper"
-            )
-        ],
-        [
-            InlineKeyboardButton(
                 text="Support", url=config.SUPPORT_GROUP
             ),
             InlineKeyboardButton(
-                text="Dev", user_id=OWNER
+                text="Updates", url=config.SUPPORT_CHANNEL
             )
         ],
         [
             InlineKeyboardButton(
-                text="Source", url=config.UPSTREAM_REPO
-            )
+                text="Help&Commands", callback_data="settings_back_helper"
+            ),
         ],
      ]
     return buttons
